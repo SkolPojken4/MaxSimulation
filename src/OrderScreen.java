@@ -1,10 +1,7 @@
 public class OrderScreen implements HasPosition {
 
-    int[] pos;
-
-    public int getX() {return this.pos[0];}
-
-    public int getY() {return this.pos[1];}
+    private int[] pos;
+    private OrderSystem orderSystem = OrderSystem.getOrderSystem();
 
     OrderScreen(int[] pos) {
         this.pos = pos;
@@ -16,6 +13,11 @@ public class OrderScreen implements HasPosition {
 
     public void setPos(int[] pos) {
         this.pos = pos;
+    }
+
+    private void sendOrder(Order order) {
+        orderSystem.addOrder(order);
+        System.out.println("Order #" + order.getOrderNumber() + " sent to order system.");
     }
 
 }
