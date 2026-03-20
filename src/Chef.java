@@ -1,2 +1,2 @@
-public class Chef {
+public class Chef extends Agent {
 }

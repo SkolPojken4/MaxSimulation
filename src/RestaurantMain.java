@@ -9,6 +9,7 @@ public class RestaurantMain extends JPanel {
     static ArrayList<Waiter> waiters = new ArrayList<Waiter>();
     static ArrayList<Chef> chefs = new ArrayList<Chef>();
     static ArrayList<Table> tables = new ArrayList<Table>();
+    static OrderSystem orderSystem = OrderSystem.getOrderSystem();
     static int windowWidth = 1200;
     static int windowHeight = 640;
     // static MasterChef mChef;
