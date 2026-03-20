@@ -1,4 +1,4 @@
-public class OrderScreen {
+public class OrderScreen implements HasPosition {
 
     int[] pos;
 

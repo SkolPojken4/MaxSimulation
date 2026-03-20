@@ -1,6 +1,6 @@
-public class Agent {
+public class Agent implements HasPosition, Movable {
 
-    int[] pos = new int[2];
+    int[] pos;
     int diameter = 50;
 
     Agent(int[] pos) {
@@ -8,6 +8,7 @@ public class Agent {
     }
 
     Agent() {
+        this.pos = new int[2];
     }
 
     public int[] getPos() {
@@ -16,6 +17,10 @@ public class Agent {
 
     public void setPos(int[] pos) {
         this.pos = pos;
+    }
+
+    public int getDiameter() {
+        return this.diameter;
     }
 
     public void move(int dx, int dy) {
