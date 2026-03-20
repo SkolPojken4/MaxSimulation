@@ -3,8 +3,8 @@ import java.util.Random;
 
 public class Order {
 
-    int orderNumber;
-    ArrayList<FoodItem> orderContent;
+    private int orderNumber;
+    private ArrayList<FoodItem> orderContent;
 
     Order() {
         setRandOrderNum();
@@ -19,6 +19,10 @@ public class Order {
     private void setRandOrderNum() {
         // Random orderNumber between 1000-9999
         this.orderNumber = new Random().nextInt(9000) + 1000;
+    }
+
+    public int getOrderNumber() {
+        return this.orderNumber;
     }
 
     public void addItem(FoodItem item) {

@@ -1,7 +1,7 @@
 public class Agent implements HasPosition, Movable {
 
-    int[] pos;
-    int diameter = 50;
+    private int[] pos;
+    private int diameter = 50;
 
     Agent(int[] pos) {
         this.pos = pos;
