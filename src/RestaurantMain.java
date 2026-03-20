@@ -9,6 +9,7 @@ public class RestaurantMain extends JPanel {
     static ArrayList<Waiter> waiters = new ArrayList<Waiter>();
     static ArrayList<Chef> chefs = new ArrayList<Chef>();
     static ArrayList<Table> tables = new ArrayList<Table>();
+    static ArrayList<OrderScreen> orderScreens = new ArrayList<OrderScreen>();
     static int windowWidth = 1200;
     static int windowHeight = 640;
     // static MasterChef mChef;
@@ -20,6 +21,8 @@ public class RestaurantMain extends JPanel {
         chefs.add(new Chef());
         waiters.add(new Waiter(600, 400));
         tables.add(new Table(800, 200));
+        orderScreens.add(new OrderScreen(new int[]{480, 200}));
+        orderScreens.add(new OrderScreen(new int[]{640, 200}));
 
     }
 
@@ -81,6 +84,9 @@ public class RestaurantMain extends JPanel {
         // Draw the chefs
         drawChefs(g);
 
+        // Draw OrderScreen
+        drawOrderScreen(g);
+
         // MORE CODE HERE
     }
 
@@ -101,6 +107,15 @@ public class RestaurantMain extends JPanel {
             g.fillOval(waiter.getX(), waiter.getY(), waiter.getDiameter(), waiter.getDiameter()); // Draw circle with diameter of 50 pixels
             g.setColor(Color.WHITE);
             g.fillOval(waiter.getX()+7, waiter.getY()+7, waiter.getDiameter()-14, waiter.getDiameter()-14); // Draw circle with diameter of 50 pixels
+        }
+    }
+
+    static void drawOrderScreen(Graphics g){
+        for (OrderScreen screen : orderScreens) {
+            g.setColor(Color.BLACK);
+            g.fillRect(screen.getX(), screen.getY(), 40, 30);
+            g.setColor(new Color(173, 216, 230));
+            g.fillRect(screen.getX() + 200, screen.getY() + 280, 35, 100);
         }
     }
 
