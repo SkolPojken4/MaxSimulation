@@ -1,10 +1,15 @@
+import java.util.Iterator;
+
 public class Chef extends Agent {
     public boolean isAvailable = true;
     private Order currentOrder = null;
-    private int numInOrder = null
+    private int numInOrder = 0;
     private FoodItem currentItem = null;
+
     private int cookingTimer = 0;
     private final int cookingTime= 100; //This should be in the food
+
+    private Iterator<FoodItem> itemIterator;
 
     public void update() {
         if (isAvailable) {
@@ -20,9 +25,8 @@ public class Chef extends Agent {
                 cookingTimer =- 1;
             }
             if (cookingTimer == 0) {
-                case currentOrder[numInOrder] = FoodItem.CourseType.FRIES;
+                case currentOrder[numInOrder] = OrderSystem.FoodType.FRIES;
                 try { num
-
                 }
             }
             // Logic to cook food
