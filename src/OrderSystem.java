@@ -5,6 +5,12 @@ public final class OrderSystem {
     private static OrderSystem orderSystem = null;
     private ArrayList<Order> orders;
 
+    public enum FoodType {
+        BURGER,
+        DRINK,
+        FRIES,
+    }
+
     private OrderSystem() {
         this.orders = new ArrayList<Order>();
     }

@@ -1,9 +1,4 @@
 public class FoodItem {
-    public enum CourseType {
-        BURGER,
-        DRINK,
-        FRIES,
-    }
 
     protected String name;
     protected CourseType type;
