@@ -1,7 +1,7 @@
 public class Fries extends FoodItem {
 
     public Fries() {
-        super("Fries", CourseType.FRIES);
+        super("Fries", OrderSystem.FoodType.FRIES);
     }
 
 }
