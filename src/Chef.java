@@ -7,7 +7,7 @@ public class Chef extends Agent {
     private FoodItem currentItem = null;
 
     private int cookingTimer = 0;
-    private final int cookingTime= 100; //This should be in the food
+    private final int cookingTime= 100; //Looks at
 
     private Iterator<FoodItem> itemIterator;
 
