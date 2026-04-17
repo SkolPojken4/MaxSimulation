@@ -7,12 +7,10 @@ public class FoodItem {
 
     protected String name;
     protected CourseType type;
-    protected int id;
     protected boolean isCooked;
 
-    public FoodItem(String name, int id, CourseType type) {
+    public FoodItem(String name, CourseType type) {
         this.name = name;
-        this.id = id;
         this.type = type;
         this.isCooked = false;
     }

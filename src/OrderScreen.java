@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class OrderScreen implements HasPosition {
@@ -22,9 +23,35 @@ public class OrderScreen implements HasPosition {
         System.out.println("Order #" + order.getOrderNumber() + " sent to order system.");
     }
 
-    private void createOrder(ArrayList<FoodItem> orderContent) {
+    private void createOrder(ArrayList<FoodItem.CourseType> orderContent) {
         Order order = new Order(orderContent);
         sendOrder(order);
+    }
+
+    // No parameters - randomize content
+    private void createOrder() {
+        ArrayList<FoodItem.CourseType> orderContent = new ArrayList<>();
+
+        // Random amount of items 1-5
+        int itemAmount = (int) (Math.random() * 5) + 1;
+
+        for (int i = 0; i < itemAmount; i++) {
+            // Random course type
+            int courseType = (int) (Math.random() * 3);
+            switch (courseType) {
+                case 0:
+                    orderContent.add(FoodItem.CourseType.BURGER);
+                    break;
+                case 1:
+                    orderContent.add(FoodItem.CourseType.FRIES);
+                    break;
+                case 2:
+                    orderContent.add(FoodItem.CourseType.DRINK);
+                    break;
+            }
+        }
+
+        createOrder(orderContent);
     }
 
 }
