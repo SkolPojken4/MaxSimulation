@@ -118,7 +118,7 @@ public class RestaurantMain extends JPanel {
 
     public static void main(String[] args) {
         // Create the frame
-        JFrame frame = new JFrame("Restuarant Simulation");
+        JFrame frame = new JFrame("Restaurant Simulation");
         frame.setSize(windowWidth, windowHeight); // Set window size
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
