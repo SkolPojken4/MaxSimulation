@@ -1,26 +1,30 @@
-public class Table {
+public class Table implements HasPosition {
 
-    public int getX() {
-        return x;
+    public int[] getPos() {
+        return this.pos;
     }
 
-    public int getY() {
-        return y;
+    public void setPos(int[] pos) {
+        this.pos = pos;
     }
 
     public int getDiameter() {
         return diameter;
     }
 
-    private int x;
-    private int y;
+    private int[] pos = new int[2];
     private int diameter = 80;
 
-    Table(int x, int y){
-        this.x = x;
-        this.y = y;
+    Table(int[] pos){
+        this.pos = pos;
     }
 
+    public int getX() {
+        return this.pos[0];
+    }
 
+    public int getY() {
+        return this.pos[1];
+    }
 
 }

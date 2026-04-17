@@ -20,7 +20,7 @@ public class RestaurantMain extends JPanel {
     static void setupRestaurant(){
         chefs.add(new Chef());
         waiters.add(new Waiter(600, 400));
-        tables.add(new Table(800, 200));
+        tables.add(new Table(new int[]{800, 200}));
 
     }
 

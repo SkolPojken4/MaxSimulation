@@ -5,16 +5,19 @@ public class FoodItem {
         FRIES,
     }
 
-    private String name;
-    private CourseType type;
-    private boolean isCooked = false;
+    protected String name;
+    protected CourseType type;
+    protected int id;
+    protected boolean isCooked;
 
-    public FoodItem(String name, CourseType type) {
+    public FoodItem(String name, int id, CourseType type) {
         this.name = name;
+        this.id = id;
         this.type = type;
+        this.isCooked = false;
     }
 
-    public CourseType getType() { return type; }
+    public CourseType getType() { return this.type; }
     public void setCooked(boolean cooked) { this.isCooked = cooked; }
-    public boolean isCooked() { return isCooked; }
+    public boolean isCooked() { return this.isCooked; }
 }
