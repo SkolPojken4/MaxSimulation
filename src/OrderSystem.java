@@ -5,6 +5,12 @@ public final class OrderSystem {
     private static OrderSystem orderSystem = null;
     private ArrayList<Order> orders;
 
+    public enum FoodType {
+        BURGER,
+        DRINK,
+        FRIES,
+    }
+
     private OrderSystem() {
         this.orders = new ArrayList<Order>();
     }
@@ -19,6 +25,13 @@ public final class OrderSystem {
     public void addOrder(Order order) {
         this.orders.add(order);
         System.out.println("Received order #" + order.getOrderNumber());
+    }
+
+    public Order takeNextOrder() {
+        if (!orders.isEmpty()) {
+            return orders.remove(0); // Hämtar och tar bort den äldsta ordern från listan
+        }
+        return null;
     }
 
     public ArrayList<Order> getOrders() {

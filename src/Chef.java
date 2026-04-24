@@ -22,18 +22,19 @@ public class Chef extends Agent {
                 this.cookingTimer = cookingTime;}
         } else {
             if (cookingTimer != 0) {
-                cookingTimer =- 1;
+                cookingTimer -= 1;
             }
             if (cookingTimer == 0) {
-                case currentOrder[numInOrder] = FoodType.FRIES;
-                try { num
-                }
-            }
-            // Logic to cook food
-        }
-    }
+                OrderSystem.getOrderSystem().finishOrder(currentOrder);
+                currentOrder = null;
+                isAvailable = true;
 
-    public Order getCurrentOrder() {
-        return currentOrder;
+        }
+        // Logic to cook food
     }
+}
+
+public Order getCurrentOrder() {
+    return currentOrder;
+}
 }

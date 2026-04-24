@@ -31,7 +31,9 @@ public class RestaurantMain extends JPanel {
         for (Waiter w : waiters) {
             // w.update();
         }
-        for
+        for (Chef c : chefs) {
+            c.update();
+        }
 
         // mChef.update();
 
