@@ -6,6 +6,7 @@ public class RestaurantMain extends JPanel {
 
     static boolean startup = true;
 
+    static ArrayList<Customer> customers = new ArrayList<Customer>();
     static ArrayList<Waiter> waiters = new ArrayList<Waiter>();
     static ArrayList<Chef> chefs = new ArrayList<Chef>();
     static ArrayList<Table> tables = new ArrayList<Table>();
@@ -18,16 +19,21 @@ public class RestaurantMain extends JPanel {
     // In here all objects that are needed for operating the restaurant should be created.
     // This is initialisation and determines the initial state of the program.
     static void setupRestaurant(){
+        customers.add(new Customer());
         chefs.add(new Chef());
         waiters.add(new Waiter(600, 400));
         tables.add(new Table(new int[]{800, 200}));
 
+        customers.getFirst().setTarget(new int[]{100,150});
     }
 
     // Contains the simulation logic, should probably be broken into smaller pieces as the program expands
     static void update() {
 
-        // what should happen with the waiter each time the simulation loops
+        for (Customer customer : customers) {
+            customer.update();
+        }
+
         for (Waiter w : waiters) {
             // w.update();
         }
@@ -48,7 +54,7 @@ public class RestaurantMain extends JPanel {
 
         setBackground(new Color(255, 245, 158, 184)); //  // Set the background color to light yellow
 
-        g.setColor(Color.DARK_GRAY); // Set the color for the border lines
+        g.setColor(Color.DARK_GRAY); // Set the color for the borderlines
         g.drawRect(500, 0, 600, getHeight() - 5);
         //g.drawRect(800, 0, getWidth() - 5, getHeight() - 5);
         g.setColor(Color.BLACK);
@@ -85,7 +91,8 @@ public class RestaurantMain extends JPanel {
         // Draw the chefs
         drawChefs(g);
 
-        // MORE CODE HERE
+        // Draw the customers
+        drawCustomers(g);
     }
 
     static void drawTables(Graphics g) {
@@ -114,6 +121,18 @@ public class RestaurantMain extends JPanel {
             g.fillOval(300, 300, 60, 60); // Draw circle with diameter of 50 pixels
             g.setColor(Color.WHITE);
             g.fillOval(303, 303, 54, 54); // Draw circle with diameter of 50 pixels
+            // g.fillOval(chef.getX()+3, chef.getY()+3, chef.getDiameter()-6, chef.getDiameter()-6); // Draw circle with diameter of 50 pixels
+        }
+    }
+
+    static void drawCustomers(Graphics g){
+        for (Customer c : customers) {
+            int[] pos = c.getPos();
+
+            g.setColor(Color.GRAY);
+            g.fillOval(pos[0], pos[1], 60, 60); // Draw circle with diameter of 50 pixels
+            g.setColor(Color.WHITE);
+            g.fillOval(pos[0] + 3, pos[1] + 1, 54, 54); // Draw circle with diameter of 50 pixels
             // g.fillOval(chef.getX()+3, chef.getY()+3, chef.getDiameter()-6, chef.getDiameter()-6); // Draw circle with diameter of 50 pixels
         }
     }

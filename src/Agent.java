@@ -8,7 +8,7 @@ public class Agent implements HasPosition, Movable {
     }
 
     Agent() {
-        this.pos = new int[2];
+        this.pos = new int[]{0, 0};
     }
 
     public int[] getPos() {
