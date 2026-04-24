@@ -21,4 +21,8 @@ public final class Desk {
         System.out.println("Order #" + order.getOrderNumber() + " received at desk.");
     }
 
+    public ArrayList<Order> getFinishedOrders() {
+        return finishedOrders;
+    }
+
 }

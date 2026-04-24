@@ -4,14 +4,14 @@ import java.util.Random;
 public class Order {
 
     private int orderNumber;
-    private ArrayList<OrderSystem.FoodType> orderContent;
+    private ArrayList<FoodType> orderContent;
 
     Order() {
         setRandOrderNum();
-        this.orderContent = new ArrayList<OrderSystem.FoodType>();
+        this.orderContent = new ArrayList<FoodType>();
     }
 
-    Order(ArrayList<OrderSystem.FoodType> orderContent) {
+    Order(ArrayList<FoodType> orderContent) {
         setRandOrderNum();
         this.orderContent = orderContent;
     }
@@ -25,8 +25,12 @@ public class Order {
         return this.orderNumber;
     }
 
-    public void addItem(OrderSystem.FoodType item) {
+    public void addItem(FoodType item) {
         orderContent.add(item);
+    }
+
+    public ArrayList<FoodType> getOrderContent() {
+        return this.orderContent;
     }
 
 }

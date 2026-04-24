@@ -7,7 +7,7 @@ public class Chef extends Agent {
     private FoodItem currentItem = null;
 
     private int cookingTimer = 0;
-    private final int cookingTime= 100; //Looks at
+    private final int cookingTime = 100; //Looks at
 
     private Iterator<FoodItem> itemIterator;
 
@@ -19,7 +19,8 @@ public class Chef extends Agent {
             if (nextOrder != null) {
                 this.currentOrder = nextOrder;
                 this.isAvailable = false;
-                this.cookingTimer = cookingTime;}
+                this.cookingTimer = cookingTime;
+            }
         } else {
             if (cookingTimer != 0) {
                 cookingTimer -= 1;

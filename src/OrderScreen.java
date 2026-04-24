@@ -23,7 +23,7 @@ public class OrderScreen implements HasPosition {
         System.out.println("Order #" + order.getOrderNumber() + " sent to order system.");
     }
 
-    private Order createOrder(ArrayList<OrderSystem.FoodType> orderContent) {
+    private Order createOrder(ArrayList<FoodType> orderContent) {
         Order order = new Order(orderContent);
         sendOrder(order);
         return order;
@@ -31,7 +31,7 @@ public class OrderScreen implements HasPosition {
 
     // No parameters - randomize content
     private Order createOrder() {
-        ArrayList<OrderSystem.FoodType> orderContent = new ArrayList<>();
+        ArrayList<FoodType> orderContent = new ArrayList<>();
 
         // Random amount of items 1-5
         int itemAmount = (int) (Math.random() * 5) + 1;
@@ -41,13 +41,13 @@ public class OrderScreen implements HasPosition {
             int courseType = (int) (Math.random() * 3);
             switch (courseType) {
                 case 0:
-                    orderContent.add(OrderSystem.FoodType.BURGER);
+                    orderContent.add(FoodType.BURGER);
                     break;
                 case 1:
-                    orderContent.add(OrderSystem.FoodType.FRIES);
+                    orderContent.add(FoodType.FRIES);
                     break;
                 case 2:
-                    orderContent.add(OrderSystem.FoodType.DRINK);
+                    orderContent.add(FoodType.DRINK);
                     break;
             }
         }

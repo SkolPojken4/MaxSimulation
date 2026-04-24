@@ -5,24 +5,18 @@ public final class OrderSystem {
     private static OrderSystem orderSystem = null;
     private ArrayList<Order> orders;
 
-    public enum FoodType {
-        BURGER,
-        DRINK,
-        FRIES,
-    }
-
     private OrderSystem() {
         this.orders = new ArrayList<Order>();
     }
 
-    public static OrderSystem getOrderSystem() {
+    static OrderSystem getOrderSystem() {
         if (orderSystem == null) {
             orderSystem = new OrderSystem();
         }
         return orderSystem;
     }
 
-    public void addOrder(Order order) {
+    void addOrder(Order order) {
         this.orders.add(order);
         System.out.println("Received order #" + order.getOrderNumber());
     }
@@ -34,11 +28,11 @@ public final class OrderSystem {
         return null;
     }
 
-    public ArrayList<Order> getOrders() {
+    ArrayList<Order> getOrders() {
         return this.orders;
     }
 
-    public void finishOrder(Order order) {
+    void finishOrder(Order order) {
         // Get desk instance, send order and remove from orderSystem.
         Desk desk = Desk.getDesk();
         desk.addFinishedOrder(order);
