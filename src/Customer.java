@@ -2,6 +2,8 @@ public class Customer extends Agent {
 
     private int[] targetPos;
     private Order order;
+    private boolean hasOrdered = false;
+    private OrderScreen targetScreen = null;
 
     public Customer() {
         super();
@@ -17,6 +19,11 @@ public class Customer extends Agent {
         this.targetPos = pos;
     }
 
+    public void setTargetScreen(OrderScreen screen) {
+        this.targetScreen = screen;
+        this.setTarget(screen.getPos());
+    }
+
     void update() {
         // Move towards targetPos
         if (this.getPos()[0] < targetPos[0]) {
@@ -30,6 +37,12 @@ public class Customer extends Agent {
         } else if (this.getPos()[1] > targetPos[1]) {
             this.move(0, -1);
         }
-    }
+        if (!hasOrdered && targetScreen != null &&
+                this.getPos()[0] == targetPos[0] && this.getPos()[1] == targetPos[1]) {
 
+            this.order = targetScreen.createOrder();
+            this.hasOrdered = true;
+            System.out.println("Customer arrived at screen and ordered!");
+        }
+    }
 }

@@ -13,6 +13,7 @@ public class RestaurantMain extends JPanel {
     static OrderSystem orderSystem = OrderSystem.getOrderSystem();
     static int windowWidth = 1200;
     static int windowHeight = 640;
+    static OrderScreen orderScreen;
     // static MasterChef mChef;
 
 
@@ -23,6 +24,7 @@ public class RestaurantMain extends JPanel {
         chefs.add(new Chef());
         waiters.add(new Waiter(600, 400));
         tables.add(new Table(new int[]{800, 200}));
+        orderScreen = new OrderScreen(new int[]{800, 800});
 
         customers.getFirst().setTarget(new int[]{100,150});
     }
@@ -107,6 +109,15 @@ public class RestaurantMain extends JPanel {
     }
 
     static  void drawWaiters(Graphics g){
+        for (Waiter waiter : waiters) {
+            g.setColor(Color.BLACK);
+            g.fillOval(waiter.getX(), waiter.getY(), waiter.getDiameter(), waiter.getDiameter()); // Draw circle with diameter of 50 pixels
+            g.setColor(Color.WHITE);
+            g.fillOval(waiter.getX()+7, waiter.getY()+7, waiter.getDiameter()-14, waiter.getDiameter()-14); // Draw circle with diameter of 50 pixels
+        }
+    }
+
+    static  void drawOrderScreen(Graphics g){
         for (Waiter waiter : waiters) {
             g.setColor(Color.BLACK);
             g.fillOval(waiter.getX(), waiter.getY(), waiter.getDiameter(), waiter.getDiameter()); // Draw circle with diameter of 50 pixels
