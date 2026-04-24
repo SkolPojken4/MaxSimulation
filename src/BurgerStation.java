@@ -21,7 +21,7 @@ public class BurgerStation extends WorkStation {
             timer--;
 
             if (timer <= 0) {
-                // Food done, gove to chef
+                // Food done, give to chef
                 // currentChef.receiveItem()
                 // currentChef.receiveItem(new Burger());
 

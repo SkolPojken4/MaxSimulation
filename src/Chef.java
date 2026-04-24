@@ -25,7 +25,7 @@ public class Chef extends Agent {
                 cookingTimer =- 1;
             }
             if (cookingTimer == 0) {
-                case currentOrder[numInOrder] = OrderSystem.FoodType.FRIES;
+                case currentOrder[numInOrder] = FoodType.FRIES;
                 try { num
                 }
             }
