@@ -20,7 +20,7 @@ public class RestaurantMain extends JPanel {
     // In here all objects that are needed for operating the restaurant should be created.
     // This is initialisation and determines the initial state of the program.
     static void setupRestaurant(){
-        customers.add(new Customer(new int[]{900, 200}));
+        customers.add(new Customer(new int[]{1020, 340}));
         chefs.add(new Chef());
         waiters.add(new Waiter(600, 400));
         tables.add(new Table(new int[]{800, 200}));
@@ -46,6 +46,15 @@ public class RestaurantMain extends JPanel {
         // mChef.update();
 
         // ... similar updates for all other agents in the simulation.
+    }
+
+    public static Table getAvailableTable() {
+        for (Table table : tables) {
+            if (table.isAvailable()) {
+                return table;
+            }
+        }
+        return tables.getFirst();
     }
 
     @Override

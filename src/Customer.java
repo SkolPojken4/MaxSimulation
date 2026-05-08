@@ -2,18 +2,20 @@ public class Customer extends Agent {
 
     private Order order = null;
     private OrderScreen targetScreen = null;
+    private Table table;
 
     public Customer() {
         super();
     }
 
     public Customer(int[] pos) {
-        super();
+        super(pos);
     }
 
     public void setTargetScreen(OrderScreen screen) {
         this.targetScreen = screen;
-        this.setTarget(screen.getPos());
+        int[] screenPos = screen.getPos();
+        this.setTarget(new int[]{screenPos[0], screenPos[1] - 70});
     }
 
     @Override
@@ -25,6 +27,14 @@ public class Customer extends Agent {
 
             this.order = targetScreen.createOrder();
             System.out.println("Customer arrived at screen and ordered!");
+
+            // Set table as target
+            table = RestaurantMain.getAvailableTable();
+            if (table != null) {
+                table.setAvailable(false);
+                int[] tablePos = table.getPos();
+                this.setTarget(new int[]{tablePos[0], tablePos[1] + 70});
+            }
         }
     }
 }

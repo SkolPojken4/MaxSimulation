@@ -1,5 +1,22 @@
 public class Table implements HasPosition {
 
+    private int[] pos = new int[2];
+    private int diameter = 80;
+    private boolean isAvailable;
+
+    Table(int[] pos){
+        this.pos = pos;
+        this.isAvailable = true;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
+    }
+
     public int[] getPos() {
         return this.pos;
     }
@@ -10,13 +27,6 @@ public class Table implements HasPosition {
 
     public int getDiameter() {
         return diameter;
-    }
-
-    private int[] pos = new int[2];
-    private int diameter = 80;
-
-    Table(int[] pos){
-        this.pos = pos;
     }
 
     public int getX() {
