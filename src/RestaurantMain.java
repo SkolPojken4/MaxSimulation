@@ -21,7 +21,10 @@ public class RestaurantMain extends JPanel {
     // This is initialisation and determines the initial state of the program.
     static void setupRestaurant(){
         customers.add(new Customer(new int[]{1020, 340}));
-        chefs.add(new Chef());
+        //Chef 1
+        chefs.add(new Chef(new int[]{100, 100}, new int[]{100, 200}));
+        //Chef 2
+        chefs.add(new Chef(new int[]{150, 100}, new int[]{150, 200}));
         waiters.add(new Waiter(600, 400));
         tables.add(new Table(new int[]{800, 200}));
         orderScreens.add(new OrderScreen(new int[]{800, 550}));
@@ -39,8 +42,8 @@ public class RestaurantMain extends JPanel {
         for (Waiter w : waiters) {
             // w.update();
         }
-        for (Chef c : chefs) {
-            c.update();
+        for (Chef chef : chefs) {
+            chef.update();
         }
 
         // mChef.update();
@@ -128,11 +131,14 @@ public class RestaurantMain extends JPanel {
 
     static void drawChefs(Graphics g){
         for (Chef chef : chefs) {
-            g.setColor(Color.GRAY);
-            g.fillOval(300, 300, 60, 60); // Draw circle with diameter of 50 pixels
-            g.setColor(Color.WHITE);
-            g.fillOval(303, 303, 54, 54); // Draw circle with diameter of 50 pixels
-            // g.fillOval(chef.getX()+3, chef.getY()+3, chef.getDiameter()-6, chef.getDiameter()-6); // Draw circle with diameter of 50 pixels
+            int[] pos = chef.getPos();
+            g.setColor(Color.RED);
+            g.fillOval(pos[0], pos[1], 50, 50);
+
+            if (!chef.isAvailable) {
+                g.setColor(Color.ORANGE);
+                g.fillRect(pos[0] + 15, pos[1] + 15, 20, 20);
+            }
         }
     }
 
