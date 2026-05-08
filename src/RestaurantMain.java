@@ -13,20 +13,20 @@ public class RestaurantMain extends JPanel {
     static OrderSystem orderSystem = OrderSystem.getOrderSystem();
     static int windowWidth = 1200;
     static int windowHeight = 640;
-    static OrderScreen orderScreen;
+    static ArrayList<OrderScreen> orderScreens = new ArrayList<OrderScreen>();
     // static MasterChef mChef;
 
 
     // In here all objects that are needed for operating the restaurant should be created.
     // This is initialisation and determines the initial state of the program.
     static void setupRestaurant(){
-        customers.add(new Customer());
+        customers.add(new Customer(new int[]{900, 200}));
         chefs.add(new Chef());
         waiters.add(new Waiter(600, 400));
         tables.add(new Table(new int[]{800, 200}));
-        orderScreen = new OrderScreen(new int[]{800, 800});
+        orderScreens.add(new OrderScreen(new int[]{800, 550}));
 
-        customers.getFirst().setTarget(new int[]{100,150});
+        customers.getFirst().setTargetScreen(orderScreens.getFirst());
     }
 
     // Contains the simulation logic, should probably be broken into smaller pieces as the program expands
@@ -88,7 +88,7 @@ public class RestaurantMain extends JPanel {
         drawTables(g);
 
         // Draw the waiters
-        drawWaiters(g);
+        drawOrderScreens(g);
 
         // Draw the chefs
         drawChefs(g);
@@ -108,21 +108,12 @@ public class RestaurantMain extends JPanel {
         }
     }
 
-    static  void drawWaiters(Graphics g){
-        for (Waiter waiter : waiters) {
+    static  void drawOrderScreens(Graphics g){
+        for (OrderScreen orderScreen : orderScreens) {
             g.setColor(Color.BLACK);
-            g.fillOval(waiter.getX(), waiter.getY(), waiter.getDiameter(), waiter.getDiameter()); // Draw circle with diameter of 50 pixels
+            g.fillRect(orderScreen.getX(), orderScreen.getY(), orderScreen.getWidth(), orderScreen.getHeight()); // Draw circle with diameter of 50 pixels
             g.setColor(Color.WHITE);
-            g.fillOval(waiter.getX()+7, waiter.getY()+7, waiter.getDiameter()-14, waiter.getDiameter()-14); // Draw circle with diameter of 50 pixels
-        }
-    }
-
-    static  void drawOrderScreen(Graphics g){
-        for (Waiter waiter : waiters) {
-            g.setColor(Color.BLACK);
-            g.fillOval(waiter.getX(), waiter.getY(), waiter.getDiameter(), waiter.getDiameter()); // Draw circle with diameter of 50 pixels
-            g.setColor(Color.WHITE);
-            g.fillOval(waiter.getX()+7, waiter.getY()+7, waiter.getDiameter()-14, waiter.getDiameter()-14); // Draw circle with diameter of 50 pixels
+            g.fillRect(orderScreen.getX()+7, orderScreen.getY()+7, orderScreen.getWidth()-14, orderScreen.getHeight()-14); // Draw circle with diameter of 50 pixels
         }
     }
 

@@ -4,17 +4,37 @@ import java.util.ArrayList;
 public class OrderScreen implements HasPosition {
 
     private int[] pos;
+    private final int width;
+    private final int height;
 
     OrderScreen(int[] pos) {
         this.pos = pos;
+        this.width = 70;
+        this.height = 20;
     }
 
     public int[] getPos() {
         return this.pos;
     }
 
+    public int getWidth() {
+        return this.width;
+    }
+
+    public int getHeight() {
+        return this.height;
+    }
+
     public void setPos(int[] pos) {
         this.pos = pos;
+    }
+
+    public int getX() {
+        return this.pos[0];
+    }
+
+    public int getY() {
+        return this.pos[1];
     }
 
     private void sendOrder(Order order) {
