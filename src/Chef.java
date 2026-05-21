@@ -1,66 +1,41 @@
 import java.util.Iterator;
 
-public class Chef extends Agent implements OrderObserver {
+public class Chef extends Agent {
     public boolean isAvailable = true;
     private Order currentOrder = null;
+    private int numInOrder = 0;
+    private FoodItem currentItem = null;
+
     private int cookingTimer = 0;
-    private final int cookingTime = 100;
+    private final int cookingTime = 100; //Looks at
 
-    private int[] restPos;
-    private int[] cookingPos;
-    private final int[] deskPos = {350, 300};
+    private Iterator<FoodItem> itemIterator;
 
-    public Chef(int[] startPos, int[] workPos) {
-        super(startPos);
-        this.restPos = startPos;
-        this.cookingPos = workPos;
-        this.setTarget(restPos);
-        OrderSystem.getOrderSystem().addObserver(this);
-    }
-
-    @Override
-    public void onNewOrderAvailable() {
-        if (isAvailable) {
-            fetchOrder();
-        }
-    }
-
-    private void fetchOrder() {
-        Order nextOrder = OrderSystem.getOrderSystem().takeNextOrder();
-        if (nextOrder != null) {
-            this.currentOrder = nextOrder;
-            this.isAvailable = false;
-            this.cookingTimer = cookingTime;
-            this.setTarget(cookingPos);
-            System.out.println("Chef picked up order #" + nextOrder.getOrderNumber());
-        }
-    }
-
-    @Override
     public void update() {
-        moveTowardsTarget();
+        if (isAvailable) {
+            OrderSystem system = OrderSystem.getOrderSystem();
+            Order nextOrder = system.takeNextOrder();
 
-        if (!isAvailable && currentOrder != null) {
-            if (getPos()[0] == cookingPos[0] && getPos()[1] == cookingPos[1]) {
-                if (cookingTimer > 0) {
-                    cookingTimer--;
-                } else {
-                    this.setTarget(deskPos);
-
-                    if (getPos()[0] == deskPos[0] && getPos()[1] == deskPos[1]) {
-                        OrderSystem.getOrderSystem().finishOrder(currentOrder);
-                        currentOrder = null;
-                        isAvailable = true;
-                        this.setTarget(restPos);
-
-                        fetchOrder();
-                    }
-                }
+            if (nextOrder != null) {
+                this.currentOrder = nextOrder;
+                this.isAvailable = false;
+                this.cookingTimer = cookingTime;
             }
-        }
-    }
+        } else {
+            if (cookingTimer != 0) {
+                cookingTimer -= 1;
+            }
+            if (cookingTimer == 0) {
+                OrderSystem.getOrderSystem().finishOrder(currentOrder);
+                currentOrder = null;
+                isAvailable = true;
 
-    public Order getCurrentOrder() {
-        return currentOrder;
+        }
+        // Logic to cook food
     }
+}
+
+public Order getCurrentOrder() {
+    return currentOrder;
+}
 }
