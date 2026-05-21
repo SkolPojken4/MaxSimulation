@@ -7,7 +7,6 @@ public class RestaurantMain extends JPanel {
     static boolean startup = true;
 
     static ArrayList<Customer> customers = new ArrayList<Customer>();
-    static ArrayList<Waiter> waiters = new ArrayList<Waiter>();
     static ArrayList<Chef> chefs = new ArrayList<Chef>();
     static ArrayList<Table> tables = new ArrayList<Table>();
     static OrderSystem orderSystem = OrderSystem.getOrderSystem();
@@ -22,7 +21,6 @@ public class RestaurantMain extends JPanel {
     static void setupRestaurant(){
         customers.add(new Customer(new int[]{1020, 340}));
         chefs.add(new Chef());
-        waiters.add(new Waiter(600, 400));
         tables.add(new Table(new int[]{800, 200}));
         orderScreens.add(new OrderScreen(new int[]{800, 550}));
 
@@ -36,9 +34,6 @@ public class RestaurantMain extends JPanel {
             customer.update();
         }
 
-        for (Waiter w : waiters) {
-            // w.update();
-        }
         for (Chef c : chefs) {
             c.update();
         }
