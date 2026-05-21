@@ -1,9 +1,12 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public final class OrderSystem {
 
     private static OrderSystem orderSystem = null;
     private ArrayList<Order> orders;
+
+    private List<OrderObserver> observers = new ArrayList<>();
 
     private OrderSystem() {
         this.orders = new ArrayList<Order>();
@@ -16,9 +19,25 @@ public final class OrderSystem {
         return orderSystem;
     }
 
+    public void addObserver(OrderObserver observer) {
+        observers.add(observer);
+    }
+
+    public void removeObserver(OrderObserver observer) {
+        observers.remove(observer);
+    }
+
+    private void notifyObservers() {
+        for (OrderObserver observer : observers) {
+            observer.onNewOrderAvailable();
+        }
+    }
+
     void addOrder(Order order) {
         this.orders.add(order);
         System.out.println("Received order #" + order.getOrderNumber());
+
+        notifyObservers();
     }
 
     public Order takeNextOrder() {
