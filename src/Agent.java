@@ -54,6 +54,11 @@ public class Agent implements HasPosition, Movable {
         }
     }
 
+    public boolean isAtTarget() {
+        return this.getPos()[0] == this.getTarget()[0] &&
+                this.getPos()[1] == this.getTarget()[1];
+    }
+
     void update() {
         moveTowardsTarget();
     }

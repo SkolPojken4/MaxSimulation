@@ -1,15 +1,31 @@
-public class Customer extends Agent {
-
+public class Customer extends Agent implements OrderObserver {
     private Order order = null;
+    private boolean orderIsReady = false;
     private OrderScreen targetScreen = null;
-    private Table table;
+    private Table table = null;
 
-    public Customer() {
-        super();
-    }
+    private final int[] deskPos = {350, 300};
+    private final int[] exitPos = {1020, 340};
+
+    private int eatingTimer = 200;
+    private boolean isEating = false;
+    private boolean isDone = false;
 
     public Customer(int[] pos) {
         super(pos);
+    }
+
+    @Override
+    public void onNewOrderAvailable() {
+        if (this.order != null && !orderIsReady) {
+            for (Order o : Desk.getDesk().getFinishedOrders()) {
+                if (o.getOrderNumber() == this.order.getOrderNumber()) {
+                    this.orderIsReady = true;
+                    this.setTarget(deskPos);
+                    break;
+                }
+            }
+        }
     }
 
     public void setTargetScreen(OrderScreen screen) {
@@ -18,22 +34,66 @@ public class Customer extends Agent {
         this.setTarget(new int[]{screenPos[0], screenPos[1] - 70});
     }
 
+    public boolean hasLeft() {
+        return isDone && isAtTarget();
+    }
+
     @Override
     void update() {
         moveTowardsTarget();
 
-        if (order == null && targetScreen != null &&
-                this.getPos()[0] == this.getTarget()[0] && this.getPos()[1] == this.getTarget()[1]) {
-
+        if (order == null && targetScreen != null && isAtTarget()) {
             this.order = targetScreen.createOrder();
-            System.out.println("Customer arrived at screen and ordered!");
+            Desk.getDesk().addObserver(this);
 
-            // Set table as target
             table = RestaurantMain.getAvailableTable();
             if (table != null) {
                 table.setAvailable(false);
-                int[] tablePos = table.getPos();
-                this.setTarget(new int[]{tablePos[0], tablePos[1] + 70});
+                setTarget(new int[]{table.getX(), table.getY() + 70});
+            }
+        }
+
+        if (order != null && !orderIsReady && table == null) {
+            table = RestaurantMain.getAvailableTable();
+            if (table != null) {
+                table.setAvailable(false);
+                setTarget(new int[]{table.getX(), table.getY() + 70});
+            }
+        }
+
+        if (orderIsReady && order != null && isAtTarget()) {
+            Order pickedUp = Desk.getDesk().pickUpOrder(order.getOrderNumber());
+            if (pickedUp != null) {
+                this.orderIsReady = false;
+
+                Desk.getDesk().removeObserver(this);
+
+                if (table == null) {
+                    table = RestaurantMain.getAvailableTable();
+                    if (table != null) {
+                        table.setAvailable(false);
+                    }
+                }
+
+                if (table != null) {
+                    setTarget(new int[]{table.getX(), table.getY() + 70});
+                    isEating = true;
+                } else {
+                    setTarget(exitPos);
+                    isDone = true;
+                }
+            }
+        }
+
+        if (isEating && table != null && isAtTarget()) {
+            if (eatingTimer > 0) {
+                eatingTimer--;
+            } else {
+                isEating = false;
+                isDone = true;
+                table.setAvailable(true);
+                setTarget(exitPos);
+                System.out.println("Customer has eaten");
             }
         }
     }

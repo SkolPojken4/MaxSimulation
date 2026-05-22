@@ -2,13 +2,14 @@ public class DrinkStation extends WorkStation {
     private Chef currentChef = null;
     private int timer = 0;
 
-    public DrinkStation() {
-        super(50);
+    public DrinkStation(int[] pos) {
+        super(50, pos); // 50 är preparationTime
     }
 
     public boolean startPreparing(Chef chef) {
-        if (currentChef == null) {
+        if (!isBusy) {
             currentChef = chef;
+            isBusy = true;
             timer = preparationTime;
             return true;
         }
@@ -17,12 +18,11 @@ public class DrinkStation extends WorkStation {
 
     @Override
     public void update() {
-        if (currentChef != null) {
+        if (isBusy && currentChef != null) {
             timer--;
 
             if (timer <= 0) {
-                // Create drink
-                // currentChef.receiveItem(new Drink());
+                isBusy = false;
                 currentChef = null;
             }
         }

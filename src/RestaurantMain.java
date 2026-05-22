@@ -168,11 +168,32 @@ public class RestaurantMain extends JPanel {
 
         while (true) {
             try {
-                Thread.sleep(33); // With the goal of having about 30 fps.
-            } catch (Exception threadException) {
-                System.out.println("Sleep exception: " + threadException.getMessage());
+                Thread.sleep(33);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            update();
+
+            // Uppdatera kockar
+            for (Chef chef : chefs) { chef.update(); }
+
+            // Uppdatera kunder och kolla om någon ska tas bort
+            Customer customerToRemove = null;
+            for (Customer c : customers) {
+                c.update();
+                if (c.hasLeft()) {
+                    customerToRemove = c;
+                }
+            }
+
+            if (customerToRemove != null) {
+                customers.remove(customerToRemove);
+                System.out.println("Spawning new customer...");
+
+                Customer newCust = new Customer(new int[]{1020, 340});
+                newCust.setTargetScreen(orderScreens.getFirst());
+                customers.add(newCust);
+            }
+
             panel.repaint();
         }
     }
