@@ -84,7 +84,7 @@ public class Chef extends Agent implements OrderObserver {
                     }
                 } else {
                     if (itemsToPrepare.isEmpty()) {
-4                        Desk.getDesk().addFinishedOrder(currentOrder);
+                        Desk.getDesk().addFinishedOrder(currentOrder);
                     }
                     prepareNextItem();
                 }
